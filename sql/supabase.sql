@@ -1,0 +1,88 @@
+-- ARTRIXY STUDIO — SQL SUPABASE COMPLETO
+create extension if not exists pgcrypto;
+
+create table if not exists site_settings (
+  id int primary key default 1,
+  site_title text default 'Artrixy Studio',
+  hero_description text,
+  about_text text,
+  whatsapp_url text,
+  resume_url text,
+  github_url text,
+  linkedin_url text,
+  instagram_url text,
+  email text,
+  logo_url text,
+  favicon_url text,
+  primary_color text default '#ff6dae',
+  seo_title text,
+  seo_description text,
+  og_image text,
+  updated_at timestamptz default now()
+);
+
+create table if not exists categories (id uuid primary key default gen_random_uuid(), name text not null, slug text unique, order_index int default 0, created_at timestamptz default now());
+create table if not exists projects (id uuid primary key default gen_random_uuid(), title text not null, slug text unique not null, category text, description text, cover text, banner text, mockup text, problem text, solution text, results text, technologies text[] default '{}', gallery text[] default '{}', project_url text, featured boolean default false, order_index int default 0, created_at timestamptz default now());
+create table if not exists services (id uuid primary key default gen_random_uuid(), title text not null, description text, icon text, image text, order_index int default 0, created_at timestamptz default now());
+create table if not exists technologies (id uuid primary key default gen_random_uuid(), name text not null, icon text, order_index int default 0);
+create table if not exists skills (id uuid primary key default gen_random_uuid(), name text not null, level int default 80, order_index int default 0);
+create table if not exists experiences (id uuid primary key default gen_random_uuid(), title text, company text, description text, start_date date, end_date date, order_index int default 0);
+create table if not exists testimonials (id uuid primary key default gen_random_uuid(), client text, role text, text text, avatar text, order_index int default 0);
+create table if not exists clients (id uuid primary key default gen_random_uuid(), name text, logo text, url text, order_index int default 0);
+create table if not exists statistics (id uuid primary key default gen_random_uuid(), label text, value text, order_index int default 0);
+create table if not exists social_links (id uuid primary key default gen_random_uuid(), name text, url text, icon text, order_index int default 0);
+create table if not exists contacts (id uuid primary key default gen_random_uuid(), name text, email text, phone text, message text, created_at timestamptz default now());
+create table if not exists admin_users (id uuid primary key default gen_random_uuid(), user_id uuid, email text unique, role text default 'admin', created_at timestamptz default now());
+
+alter table site_settings enable row level security;
+alter table categories enable row level security;
+alter table projects enable row level security;
+alter table services enable row level security;
+alter table technologies enable row level security;
+alter table skills enable row level security;
+alter table experiences enable row level security;
+alter table testimonials enable row level security;
+alter table clients enable row level security;
+alter table statistics enable row level security;
+alter table social_links enable row level security;
+alter table contacts enable row level security;
+alter table admin_users enable row level security;
+
+do $$ begin
+  create policy "public read settings" on site_settings for select using (true);
+  create policy "public read categories" on categories for select using (true);
+  create policy "public read projects" on projects for select using (true);
+  create policy "public read services" on services for select using (true);
+  create policy "public read tech" on technologies for select using (true);
+  create policy "public read skills" on skills for select using (true);
+  create policy "public read experiences" on experiences for select using (true);
+  create policy "public read testimonials" on testimonials for select using (true);
+  create policy "public read clients" on clients for select using (true);
+  create policy "public read stats" on statistics for select using (true);
+  create policy "public read socials" on social_links for select using (true);
+exception when duplicate_object then null; end $$;
+
+do $$ declare t text; begin
+  foreach t in array array['site_settings','categories','projects','services','technologies','skills','experiences','testimonials','clients','statistics','social_links','contacts'] loop
+    execute format('drop policy if exists "admin all %s" on %I', t, t);
+    execute format('create policy "admin all %s" on %I for all using (auth.role() = ''authenticated'') with check (auth.role() = ''authenticated'')', t, t);
+  end loop;
+end $$;
+
+insert into site_settings (id, hero_description, about_text, whatsapp_url, resume_url, github_url, linkedin_url, instagram_url, email, seo_title, seo_description) values
+(1,'Design com propósito, tecnologia com estética e experiências digitais criadas para gerar presença, confiança e resultado.','A Artrixy Studio nasce para unir estética editorial, estratégia e desenvolvimento em projetos digitais que conectam marcas e pessoas.','https://wa.me/5500000000000','#','#','#','#','contato@artrixy.com','Artrixy Studio — Portfólio Profissional','Portfólio premium de design, web design e desenvolvimento.')
+on conflict (id) do nothing;
+
+insert into services(title,description,icon,order_index) values
+('Design Gráfico','Identidade visual, social media, peças impressas e comunicação visual.','✒',1),('Web Design','Sites modernos, responsivos e focados na melhor experiência do usuário.','▣',2),('Desenvolvimento','Soluções web completas com tecnologias modernas e escaláveis.','</>',3),('Projetos Digitais','Sistemas personalizados, automações, dashboards e plataformas web.','🚀',4)
+on conflict do nothing;
+insert into projects(title,slug,category,description,featured,technologies,problem,solution,results,order_index) values
+('BARMY ZONE','barmy-zone','Desenvolvimento','Plataforma para fãs com experiência visual premium.',true,array['HTML','CSS','JavaScript','Supabase'],'Organizar conteúdos e interações de fãs.','Interface responsiva, cards dinâmicos e painel editável.','Navegação clara, identidade forte e gestão simples.',1),
+('Atrix Nails','atrix-nails','Web Design','Sistema de agendamento online com estética delicada.',true,array['React','Tailwind','Supabase'],'Agendamentos manuais e pouca presença digital.','Landing page com fluxo visual de serviços e contato.','Apresentação profissional e mais clareza para clientes.',2),
+('Studio Dashboard','studio-dashboard','Dashboard','Painel administrativo completo para edição de conteúdo.',true,array['Supabase','JavaScript'],'Editar site sem mexer no código.','CRUD completo para conteúdo e projetos.','Autonomia total no gerenciamento.',3),
+('Landing Pages','landing-pages','Web Design','Coleção de páginas criativas e modernas.',true,array['HTML','CSS','JS'],'Marcas precisavam apresentar ideias com impacto.','Páginas editoriais com estética premium.','Apresentações mais fortes e memoráveis.',4)
+on conflict (slug) do nothing;
+insert into technologies(name,order_index) values ('HTML',1),('CSS',2),('JavaScript',3),('TypeScript',4),('React',5),('Tailwind',6),('PHP',7),('Supabase',8),('Figma',9),('Photoshop',10),('Illustrator',11),('Git',12),('GitHub',13),('VS Code',14) on conflict do nothing;
+insert into skills(name,level,order_index) values ('Design UI',94,1),('Web Design',92,2),('Desenvolvimento Front-end',86,3),('Identidade Visual',90,4) on conflict do nothing;
+insert into statistics(label,value,order_index) values ('Projetos concluídos','+20',1),('Clientes satisfeitos','+10',2),('Dedicação em cada detalhe','100%',3),('Criatividade sem limites','∞',4) on conflict do nothing;
+insert into testimonials(client,role,text,order_index) values ('Cliente Artrixy','Marca digital','Visual sofisticado, entrega cuidadosa e resultado profissional.',1),('Projeto Studio','Dashboard','O painel facilitou a edição e deixou tudo mais organizado.',2),('Landing Page','Web Design','A estética ficou premium e muito alinhada com a marca.',3) on conflict do nothing;
