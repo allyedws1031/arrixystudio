@@ -1,6 +1,6 @@
-# Prompts de imagens — Artrixy Studio
+# Base de criação  — Artrixy Studio
 
-Use sempre: estética editorial premium, fundo branco/off-white, rosa pastel, rosa claro, detalhes em preto, tipografia grande com mistura serifada e sans-serif, composição limpa, revista de design, glassmorphism leve, formas orgânicas, cartões flutuantes, sombras suaves, identidade exclusiva Artrixy Studio.
+Estética editorial, fundo branco/off-white, rosa pastel, rosa claro, detalhes em preto, tipografia media com mistura serifada e sans-serif, composição limpa, revista de design, glassmorphism leve, formas orgânicas, cartões flutuantes, sombras suaves, identidade exclusiva Artrixy Studio.
 
 ## Hero principal
 Composição editorial premium para portfólio Artrixy Studio, cartão rosa pastel com logo minimalista, mockups flutuantes, adesivos delicados, estrela rosa, blocos transparentes, fundo off-white, tipografia grande serifada e sans-serif, estética fashion magazine, clean, profissional.
