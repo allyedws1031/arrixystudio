@@ -31,7 +31,7 @@ export async function getProjects() {
     const { data, error } = await withTimeout(query, REQUEST_TIMEOUT_MS);
 
     if (error) throw error;
-    return Array.isArray(data) && data.length ? data : fallbackProjects;
+    return Array.isArray(data) ? data : fallbackProjects;
   } catch (error) {
     console.warn('[Artrixy] Projetos remotos indisponíveis; usando fallback local.', error);
     return fallbackProjects;
@@ -40,8 +40,13 @@ export async function getProjects() {
 
 
 export async function getTable(name, fallback){
-  try{ const {data,error}=await supabase.from(name).select('*').order('order_index',{ascending:true}); if(error||!data||!data.length) return fallback; return data; }catch(e){ return fallback; }
+  try{
+    const {data,error}=await supabase.from(name).select('*').order('order_index',{ascending:true});
+    if(error) return fallback;
+    return Array.isArray(data) ? data : fallback;
+  }catch(e){ return fallback; }
 }
+
 export async function getSettings(){
   try{ const {data,error}=await supabase.from('site_settings').select('*').limit(1).single(); if(error||!data) return demoData.settings; return data; }catch(e){ return demoData.settings; }
 }

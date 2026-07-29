@@ -83,7 +83,7 @@ insert into projects(title,slug,category,description,featured,technologies,probl
 ('Landing Pages','landing-pages','Web Design','Coleção de páginas criativas e modernas.',true,array['HTML','CSS','JS'],'Marcas precisavam apresentar ideias com impacto.','Páginas editoriais com estética premium.','Apresentações mais fortes e memoráveis.',4)
 on conflict (slug) do nothing;
 insert into technologies(name,order_index) values ('HTML',1),('CSS',2),('JavaScript',3),('TypeScript',4),('React',5),('Tailwind',6),('PHP',7),('Supabase',8),('Figma',9),('Photoshop',10),('Illustrator',11),('Git',12),('GitHub',13),('VS Code',14) on conflict do nothing;
-insert into skills(name,level,order_index) values ('Design UI',94,1),('Web Design',92,2),('Desenvolvimento Front-end',86,3),('Identidade Visual',90,4) on conflict do nothing;
+-- A tabela skills começa vazia. Adicione habilidades somente pelo painel administrativo.
 insert into statistics(label,value,order_index) values ('Projetos concluídos','+20',1),('Clientes satisfeitos','+10',2),('Dedicação em cada detalhe','100%',3),('Criatividade sem limites','∞',4) on conflict do nothing;
 insert into testimonials(client,role,text,order_index) values ('Cliente Artrixy','Marca digital','Visual sofisticado, entrega cuidadosa e resultado profissional.',1),('Projeto Studio','Dashboard','O painel facilitou a edição e deixou tudo mais organizado.',2),('Landing Page','Web Design','A estética ficou premium e muito alinhada com a marca.',3) on conflict do nothing;
 

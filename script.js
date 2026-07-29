@@ -19,7 +19,7 @@ const demoData = {
   ],
   stats:[{label:'Projetos concluídos',value:'+20'},{label:'Clientes satisfeitos',value:'+10'},{label:'Dedicação em cada detalhe',value:'100%'},{label:'Criatividade sem limites',value:'∞'}],
   technologies:['HTML','CSS','JavaScript','TypeScript','React','Tailwind','PHP','Supabase','Figma','Photoshop','Illustrator','Git','GitHub','VS Code'],
-  skills:[{name:'Design UI',level:94},{name:'Web Design',level:92},{name:'Desenvolvimento Front-end',level:86},{name:'Identidade Visual',level:90}],
+  skills:[],
   testimonials:[{client:'Cliente Artrixy',text:'Visual sofisticado, entrega cuidadosa e resultado profissional.',role:'Marca digital'},{client:'Projeto Studio',text:'O painel facilitou a edição e deixou tudo mais organizado.',role:'Dashboard'},{client:'Landing Page',text:'A estética ficou premium e muito alinhada com a marca.',role:'Web Design'}]
 };;
 
