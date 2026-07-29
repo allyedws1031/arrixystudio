@@ -86,3 +86,52 @@ insert into technologies(name,order_index) values ('HTML',1),('CSS',2),('JavaScr
 insert into skills(name,level,order_index) values ('Design UI',94,1),('Web Design',92,2),('Desenvolvimento Front-end',86,3),('Identidade Visual',90,4) on conflict do nothing;
 insert into statistics(label,value,order_index) values ('Projetos concluídos','+20',1),('Clientes satisfeitos','+10',2),('Dedicação em cada detalhe','100%',3),('Criatividade sem limites','∞',4) on conflict do nothing;
 insert into testimonials(client,role,text,order_index) values ('Cliente Artrixy','Marca digital','Visual sofisticado, entrega cuidadosa e resultado profissional.',1),('Projeto Studio','Dashboard','O painel facilitou a edição e deixou tudo mais organizado.',2),('Landing Page','Web Design','A estética ficou premium e muito alinhada com a marca.',3) on conflict do nothing;
+
+-- ATUALIZAÇÃO 2026: campos adicionais sem apagar dados existentes
+alter table site_settings add column if not exists hero_eyebrow text default 'DESIGN • DESENVOLVIMENTO • ESTRATÉGIA';
+alter table site_settings add column if not exists hero_title text default 'Artrixy';
+alter table site_settings add column if not exists hero_accent text default 'studio';
+alter table site_settings add column if not exists proof_text text default '+20 projetos entregues com criatividade e foco em resultados';
+alter table site_settings add column if not exists services_title text;
+alter table site_settings add column if not exists services_description text;
+alter table site_settings add column if not exists projects_title text;
+alter table site_settings add column if not exists about_title text;
+alter table site_settings add column if not exists signature_text text;
+alter table site_settings add column if not exists skills_title text;
+alter table site_settings add column if not exists contact_title text;
+alter table site_settings add column if not exists contact_description text;
+alter table site_settings add column if not exists footer_text text;
+alter table services add column if not exists link_url text;
+alter table services add column if not exists active boolean default true;
+alter table projects add column if not exists active boolean default true;
+alter table experiences add column if not exists period text;
+
+update site_settings set
+ services_title=coalesce(services_title,'Soluções criativas para marcas que querem se destacar'),
+ services_description=coalesce(services_description,'Design estratégico, tecnologia e criatividade trabalhando juntos.'),
+ projects_title=coalesce(projects_title,'Projetos selecionados'),
+ about_title=coalesce(about_title,'transformo ideias em experiências digitais'),
+ signature_text=coalesce(signature_text,'Artrixy ♡'),
+ skills_title=coalesce(skills_title,'Tecnologias e habilidades'),
+ contact_title=coalesce(contact_title,'criatividade estratégica para o seu próximo projeto'),
+ contact_description=coalesce(contact_description,'Entre em contato pelos canais abaixo.'),
+ footer_text=coalesce(footer_text,'CRIAR • CONECTAR • TRANSFORMAR')
+where id=1;
+
+-- Bucket público para imagens do painel
+insert into storage.buckets (id,name,public,file_size_limit,allowed_mime_types)
+values ('site-media','site-media',true,5242880,array['image/jpeg','image/png','image/webp','image/gif','image/svg+xml'])
+on conflict (id) do update set public=true, file_size_limit=5242880;
+
+do $$ begin
+  create policy "public read site media" on storage.objects for select using (bucket_id='site-media');
+exception when duplicate_object then null; end $$;
+do $$ begin
+  create policy "authenticated upload site media" on storage.objects for insert to authenticated with check (bucket_id='site-media');
+exception when duplicate_object then null; end $$;
+do $$ begin
+  create policy "authenticated update site media" on storage.objects for update to authenticated using (bucket_id='site-media') with check (bucket_id='site-media');
+exception when duplicate_object then null; end $$;
+do $$ begin
+  create policy "authenticated delete site media" on storage.objects for delete to authenticated using (bucket_id='site-media');
+exception when duplicate_object then null; end $$;
