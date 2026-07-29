@@ -1,51 +1,366 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="site-loading">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
   <title>Artrixy Studio — Portfólio Profissional</title>
-  <meta name="description" content="Design, desenvolvimento e experiências digitais com estética premium.">
+
+  <meta
+    name="description"
+    content="Design, desenvolvimento e experiências digitais com estética premium."
+  >
+
   <meta name="theme-color" content="#fff3f7">
+
   <link rel="icon" href="assets/favicon.svg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap"
+      rel="stylesheet"
+    >
+  </noscript>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="nav glass">
-    <a class="logo" href="#home"><span>✦</span><b id="brandName">Artrixy</b><small>Studio</small></a>
-    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
-    <nav><a href="#home">Home</a><a href="#sobre">Sobre</a><a href="portfolio.html">Portfólio</a><a href="#habilidades">Habilidades</a><a href="#contato">Contato</a></nav>
-    <a class="btn dark nav-cta" id="navWhatsapp" target="_blank" rel="noopener">Vamos conversar ↗</a>
-  </header>
-  <main id="home">
-    <section class="hero section">
-      <div class="hero-copy reveal">
-        <div class="pill" id="heroEyebrow">DESIGN • DESENVOLVIMENTO • ESTRATÉGIA</div>
-        <h1><span id="heroTitle">Artrixy</span><em id="heroAccent">studio</em></h1>
-        <p id="heroDescription">Design com propósito, tecnologia com estética e experiências digitais criadas para gerar presença, confiança e resultado.</p>
-        <div class="actions"><a class="btn pink" href="portfolio.html">Ver projetos ↗</a><a class="btn light" id="resumeBtn" target="_blank" rel="noopener">Baixar currículo ↓</a></div>
-        <div class="mini-proof"><span class="proof-dots">● ● ● ●</span><span id="proofText">+20 projetos entregues com criatividade e foco em resultados</span></div>
+  <div
+    class="site-loader"
+    id="siteLoader"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="site-loader-inner">
+      <div class="site-loader-mark">
+        Artrixy <em>Studio</em>
       </div>
-      <div class="hero-art reveal" aria-hidden="true"><div class="organic"></div><div class="card editorial-card"><small>design<br>com propósito</small><b>Artrixy</b><span>STUDIO ✦</span></div><div class="card web-card"><b>WEB</b><span>experiências digitais</span></div><div class="sticker top">PORTFÓLIO</div><div class="browser-card"><span></span><span></span><span></span><i>✧</i></div><div class="sticker side">✦</div><h2>criatividade<br><em>que gera</em><br>resultados</h2></div>
-    </section>
-    <section id="solucoes" class="section split">
-      <div class="section-title reveal"><small id="servicesEyebrow">O QUE EU FAÇO</small><h2 id="servicesTitle">Soluções <em>criativas</em><br>para marcas que querem se destacar</h2><p id="servicesDescription">Design estratégico, tecnologia e criatividade trabalhando juntos.</p></div>
-      <div class="service-grid" id="servicesGrid"></div>
-    </section>
-    <section id="portfolio" class="section portfolio-strip">
-      <div class="row-head"><div><small>PROJETOS EM DESTAQUE ✦</small><h2 id="projectsTitle">Projetos selecionados</h2></div><a class="btn light" href="portfolio.html">Ver todos →</a></div>
-      <div class="project-row" id="featuredProjects"></div>
-    </section>
-    <section id="sobre" class="section magazine">
-      <div class="paper pink-paper">♡</div><div><small>SOBRE O STUDIO ✦</small><h2 id="aboutTitle">transformo<br>ideias em<br><em>experiências</em><br>digitais</h2><p id="aboutText"></p><span class="signature" id="signatureText">Artrixy ♡</span></div><div class="stats-grid" id="statsGrid"></div>
-    </section>
-    <section id="experiencias" class="section optional-section hidden-section"><div class="row-head"><div><small>TRAJETÓRIA</small><h2>Experiências</h2></div></div><div class="timeline" id="experienceList"></div></section>
-    <section id="habilidades" class="section skills-section"><div class="row-head"><div><small>CONHECIMENTOS</small><h2 id="skillsTitle">Tecnologias e habilidades</h2></div></div><div class="tech-grid" id="techGrid"></div><div class="skill-list" id="skillList"></div></section>
-    <section class="section testimonials"><div class="row-head"><div><small>CLIENTES</small><h2>Depoimentos</h2></div></div><div class="testimonial-grid" id="testimonialGrid"></div></section>
-    <section id="contato" class="section contact glass"><small>VAMOS CRIAR ALGO?</small><h2 id="contactTitle">criatividade estratégica para o seu próximo projeto</h2><p id="contactDescription">Entre em contato pelos canais abaixo.</p><div class="contact-links" id="contactLinks"></div></section>
-  </main>
-  <footer><b id="footerBrand">Artrixy Studio</b><span id="footerText">CRIAR • CONECTAR • TRANSFORMAR</span></footer>
+
+      <div class="site-loader-line"></div>
+
+      <p>Preparando o portfólio</p>
+    </div>
+  </div>
+
+  <div class="site-shell" id="siteShell">
+    <header class="nav glass">
+      <a class="logo" href="#home" aria-label="Ir para o início">
+        <span>✦</span>
+        <b id="brandName">Artrixy</b>
+        <small>Studio</small>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav aria-label="Navegação principal">
+        <a href="#home">Home</a>
+        <a href="#sobre">Sobre</a>
+        <a href="portfolio.html">Portfólio</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a
+        class="btn dark nav-cta"
+        id="navWhatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Vamos conversar ↗
+      </a>
+    </header>
+
+    <main id="home">
+      <section class="hero section">
+        <div class="hero-copy reveal">
+          <div class="pill" id="heroEyebrow">
+            DESIGN • DESENVOLVIMENTO • ESTRATÉGIA
+          </div>
+
+          <h1>
+            <span id="heroTitle">Artrixy</span>
+            <em id="heroAccent">studio</em>
+          </h1>
+
+          <p id="heroDescription">
+            Design com propósito, tecnologia com estética e experiências
+            digitais criadas para gerar presença, confiança e resultado.
+          </p>
+
+          <div class="actions">
+            <a class="btn pink" href="portfolio.html">
+              Ver projetos ↗
+            </a>
+
+            <a class="btn light" href="#contato">
+              Entrar em contato ↗
+            </a>
+          </div>
+
+          <div class="mini-proof">
+            <span class="proof-dots">● ● ● ●</span>
+
+            <span id="proofText">
+              +20 projetos entregues com criatividade e foco em resultados
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-art reveal" aria-hidden="true">
+          <div class="organic"></div>
+
+          <div class="card editorial-card">
+            <small>
+              design
+              <br>
+              com propósito
+            </small>
+
+            <b>Artrixy</b>
+
+            <span>STUDIO ✦</span>
+          </div>
+
+          <div class="card web-card">
+            <b>WEB</b>
+            <span>experiências digitais</span>
+          </div>
+
+          <div class="sticker top">
+            PORTFÓLIO
+          </div>
+
+          <div class="browser-card">
+            <span></span>
+            <span></span>
+            <span></span>
+            <i>✧</i>
+          </div>
+
+          <div class="sticker side">
+            ✦
+          </div>
+
+          <h2>
+            criatividade
+            <br>
+            <em>que gera</em>
+            <br>
+            resultados
+          </h2>
+        </div>
+      </section>
+
+      <section id="solucoes" class="section split">
+        <div class="section-title reveal">
+          <small id="servicesEyebrow">
+            O QUE EU FAÇO
+          </small>
+
+          <h2 id="servicesTitle">
+            Soluções <em>criativas</em>
+            <br>
+            para marcas que querem se destacar
+          </h2>
+
+          <p id="servicesDescription">
+            Design estratégico, tecnologia e criatividade trabalhando juntos.
+          </p>
+        </div>
+
+        <div
+          class="service-grid"
+          id="servicesGrid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section id="portfolio" class="section portfolio-strip">
+        <div class="row-head">
+          <div>
+            <small>
+              PROJETOS EM DESTAQUE ✦
+            </small>
+
+            <h2 id="projectsTitle">
+              Projetos selecionados
+            </h2>
+          </div>
+
+          <a class="btn light" href="portfolio.html">
+            Ver todos →
+          </a>
+        </div>
+
+        <div
+          class="project-row"
+          id="featuredProjects"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section id="sobre" class="section magazine">
+        <div class="paper pink-paper" aria-hidden="true">
+          ♡
+        </div>
+
+        <div>
+          <small>
+            SOBRE O STUDIO ✦
+          </small>
+
+          <h2 id="aboutTitle">
+            transformo
+            <br>
+            ideias em
+            <br>
+            <em>experiências</em>
+            <br>
+            digitais
+          </h2>
+
+          <p id="aboutText"></p>
+
+          <span class="signature" id="signatureText">
+            Artrixy ♡
+          </span>
+        </div>
+
+        <div
+          class="stats-grid"
+          id="statsGrid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section
+        id="experiencias"
+        class="section optional-section hidden-section"
+      >
+        <div class="row-head">
+          <div>
+            <small>
+              TRAJETÓRIA
+            </small>
+
+            <h2>
+              Experiências
+            </h2>
+          </div>
+        </div>
+
+        <div
+          class="timeline"
+          id="experienceList"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section id="habilidades" class="section skills-section">
+        <div class="row-head">
+          <div>
+            <small>
+              CONHECIMENTOS
+            </small>
+
+            <h2 id="skillsTitle">
+              Tecnologias e habilidades
+            </h2>
+          </div>
+        </div>
+
+        <div
+          class="tech-grid"
+          id="techGrid"
+          aria-live="polite"
+        ></div>
+
+        <div
+          class="skill-list"
+          id="skillList"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section class="section testimonials">
+        <div class="row-head">
+          <div>
+            <small>
+              CLIENTES
+            </small>
+
+            <h2>
+              Depoimentos
+            </h2>
+          </div>
+        </div>
+
+        <div
+          class="testimonial-grid"
+          id="testimonialGrid"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section id="contato" class="section contact glass">
+        <small>
+          VAMOS CRIAR ALGO?
+        </small>
+
+        <h2 id="contactTitle">
+          criatividade estratégica para o seu próximo projeto
+        </h2>
+
+        <p id="contactDescription">
+          Entre em contato pelos canais abaixo.
+        </p>
+
+        <div
+          class="contact-links"
+          id="contactLinks"
+          aria-live="polite"
+        ></div>
+      </section>
+    </main>
+
+    <footer>
+      <b id="footerBrand">
+        Artrixy Studio
+      </b>
+
+      <span id="footerText">
+        CRIAR • CONECTAR • TRANSFORMAR
+      </span>
+    </footer>
+  </div>
+
   <script type="module" src="app.js"></script>
-</body></html>
+</body>
+</html>

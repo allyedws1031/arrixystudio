@@ -135,3 +135,33 @@ exception when duplicate_object then null; end $$;
 do $$ begin
   create policy "authenticated delete site media" on storage.objects for delete to authenticated using (bucket_id='site-media');
 exception when duplicate_object then null; end $$;
+
+
+-- =========================================================
+-- MÍDIA DE PROJETOS: IMAGENS + VÍDEOS (ATUALIZAÇÃO)
+-- =========================================================
+alter table projects add column if not exists video_url text;
+alter table projects add column if not exists video_type text default 'upload' check (video_type in ('upload','embed'));
+alter table projects add column if not exists media_type text default 'image' check (media_type in ('image','video'));
+
+insert into storage.buckets (id,name,public,file_size_limit,allowed_mime_types)
+values (
+ 'portfolio-media','portfolio-media',true,52428800,
+ array['image/jpeg','image/png','image/webp','image/gif','image/svg+xml','video/mp4','video/webm','video/ogg']
+)
+on conflict (id) do update set
+ public=true,
+ file_size_limit=52428800,
+ allowed_mime_types=excluded.allowed_mime_types;
+
+drop policy if exists "public read portfolio media" on storage.objects;
+create policy "public read portfolio media" on storage.objects for select to public using (bucket_id='portfolio-media');
+drop policy if exists "authenticated upload portfolio media" on storage.objects;
+create policy "authenticated upload portfolio media" on storage.objects for insert to authenticated with check (bucket_id='portfolio-media');
+drop policy if exists "authenticated update portfolio media" on storage.objects;
+create policy "authenticated update portfolio media" on storage.objects for update to authenticated using (bucket_id='portfolio-media') with check (bucket_id='portfolio-media');
+drop policy if exists "authenticated delete portfolio media" on storage.objects;
+create policy "authenticated delete portfolio media" on storage.objects for delete to authenticated using (bucket_id='portfolio-media');
+
+drop policy if exists "public read projects" on projects;
+create policy "public read projects" on projects for select to anon, authenticated using (true);
