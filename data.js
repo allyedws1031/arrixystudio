@@ -22,6 +22,3 @@ export const demoData = {
   skills:[{name:'Design UI',level:94},{name:'Web Design',level:92},{name:'Desenvolvimento Front-end',level:86},{name:'Identidade Visual',level:90}],
   testimonials:[{client:'Cliente Artrixy',text:'Visual sofisticado, entrega cuidadosa e resultado profissional.',role:'Marca digital'},{client:'Projeto Studio',text:'O painel facilitou a edição e deixou tudo mais organizado.',role:'Dashboard'},{client:'Landing Page',text:'A estética ficou premium e muito alinhada com a marca.',role:'Web Design'}]
 };;
-
-// Fallback público usado quando o Supabase estiver lento ou indisponível.
-export const fallbackProjects = demoData.projects;
